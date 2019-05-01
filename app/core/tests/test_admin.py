@@ -18,7 +18,6 @@ class AdminSiteTests(TestCase):
             name='Full Name'
         )
 
-
     def test_users_listed(self):
         """Test users are listed on user page"""
         url = reverse('admin:core_user_changelist')

@@ -17,6 +17,10 @@ To start project, run:
 ```
 docker-compose up
 ```
+To run unit tests:
+```
+docker-compose run --rm app sh -c "python manage.py test && flake8"
+```
 
 The API will then be available at http://localhost:8000
 

@@ -1,5 +1,12 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from core import models
+
+
+def sample_user(email='test@email.com', password='123456'):
+    """Creates a sample user"""
+    return get_user_model().objects.create_user(email, password)
+
 
 
 class ModelTest(TestCase):
@@ -29,3 +36,18 @@ class ModelTest(TestCase):
 
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_review_str(self):
+        """Test the review string representaion"""
+        review = models.Review.objects.create(
+            user=sample_user(),
+            title='Great place to shop!',
+            ip_address='127.0.0.1',
+            rating='5',
+            summary='I am very happy...',
+            submission_date='2019-05-01',
+            company='Happy Stores',
+        )
+
+        self.assertEqual(str(review), review.title)
+

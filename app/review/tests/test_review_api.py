@@ -60,7 +60,7 @@ class PrivateReviewApiTest(TestCase):
         reviews = Review.objects.all().order_by('-submission_date')
         # reviews = (Review.objects.filter(user=self.user)
         #            .order_by('-submission_date'))
-        serializer = ReviewSerializer
+        serializer = ReviewSerializer(reviews, many=True)
 
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         self.assertEqual(resp.data, serializer.data)
@@ -77,7 +77,7 @@ class PrivateReviewApiTest(TestCase):
         resp = self.client.get(REVIEW_URL)
 
         reviews = Review.objects.filter(user=self.user)
-        serializer = ReviewSerializer
+        serializer = ReviewSerializer(reviews, many=True)
 
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         self.assertEqual(len(resp.data), 1)

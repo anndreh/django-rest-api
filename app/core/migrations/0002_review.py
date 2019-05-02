@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('rating', models.IntegerField()),
                 ('title', models.CharField(max_length=64)),
                 ('summary', models.CharField(max_length=10000)),
-                ('ip_address', models.CharField(max_length=15)),
+                ('ip_address', models.GenericIPAddressField()),
                 ('submission_date', models.DateField(default=datetime.date.today)),
                 ('company', models.CharField(max_length=255)),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),

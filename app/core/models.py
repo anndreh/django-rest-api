@@ -46,7 +46,7 @@ class Review(models.Model):
     rating = models.IntegerField()
     title = models.CharField(max_length=64)
     summary = models.CharField(max_length=10000)
-    ip_address = models.CharField(max_length=15)
+    ip_address = models.GenericIPAddressField()
     submission_date = models.DateField(default=date.today)
     company = models.CharField(max_length=255)
 

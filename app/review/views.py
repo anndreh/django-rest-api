@@ -10,7 +10,7 @@ from review import serializers
 
 class ReviewViewSet(viewsets.ModelViewSet):
     """Manage reviews in the database"""
-    serializer_class = serializers.ReviewSerializer()
+    serializer_class = serializers.ReviewSerializer
     queryset = Review.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)

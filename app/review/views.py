@@ -18,3 +18,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         """Retrieve the reviews for authenticated user"""
         return self.queryset.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        """Creates a new review"""
+        serializer.save(user=self.request.user)

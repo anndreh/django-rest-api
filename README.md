@@ -36,15 +36,49 @@ Showing report (coverage - 100%)
 docker-compose run --rm app sh -c "coverage report"
 ```
 
-## Some samples of use
+## Admin area to see all data
 
 Django admin page to see users and reviews:
 http://localhost:8000/admin/
 
 #### API endpoints
 
-Creating a new user:
-http://localhost:8000/api/user/create/
-
 Generating new token with login:
 http://localhost:8000/api/user/token/
+
+Listing reviews from logged user
+```
+curl -H "Authorization: Token xxx" http://localhost:8000/api/v1/review/review/
+```
+
+Creating a new user:
+```
+curl -H "Authorization: Token xxx" -H "Content-Type: application/json" -d '{
+    "title": "Testing rating",
+    "ip_address": "127.0.0.8",
+    "rating": 1,
+    "summary": "Trash Place",
+    "submission_date": "2019-05-03",
+    "company": "Somewhere"
+}' -X POST http://localhost:8000/api/v1/review/review/
+```
+
+Partial updating 
+```
+curl -H "Authorization: Token xxx" -H "Content-Type: application/json" -d '{
+    "summary": "Worst Place.",
+    "rating": 3
+}' -X PATCH http://localhost:8000/api/v1/review/review/5/
+```
+
+Complete updating
+```
+curl -H "Authorization: Token xxx" -H "Content-Type: application/json" -d '{
+    "title": "Testing rating",
+    "ip_address": "127.0.0.8",
+    "rating": 1,
+    "summary": "Trash Place",
+    "submission_date": "2019-05-03",
+    "company": "Somewhere"
+}' -X PUT http://localhost:8000/api/v1/review/review/1/
+```

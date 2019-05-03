@@ -24,12 +24,24 @@ docker-compose run --rm app sh -c "python manage.py test && flake8"
 
 The API will then be available at http://localhost:8000
 
+## Tests
+
+Executing all tests (unit tests, PEP8 e coverage)
+```
+docker-compose run --rm app sh -c "coverage run --source='.' manage.py test && flake8"
+```
+
+Showing report (coverage - 100%)
+```
+docker-compose run --rm app sh -c "coverage report"
+```
+
 ## Some samples of use
 
 Django admin page to see users and reviews:
 http://localhost:8000/admin/
 
-#### API endpoinst
+#### API endpoints
 
 Creating a new user:
 http://localhost:8000/api/user/create/

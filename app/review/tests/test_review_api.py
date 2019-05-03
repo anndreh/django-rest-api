@@ -12,9 +12,11 @@ from review.serializers import ReviewSerializer
 
 REVIEW_URL = reverse('review:review-list')
 
+
 def detail_url(review_id):
     """Return review detail URL"""
     return reverse('review:review-detail', args=[review_id])
+
 
 def sample_review(user, **params):
     """Create and return a sample review"""
@@ -65,10 +67,6 @@ class PrivateReviewApiTest(TestCase):
         sample_review(user=self.user)
 
         resp = self.client.get(REVIEW_URL)
-        reviews = Review.objects.all().order_by('-submission_date')
-        # reviews = (Review.objects.filter(user=self.user)
-        #            .order_by('-submission_date'))
-        serializer = ReviewSerializer(reviews, many=True)
 
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         self.assertEqual(len(resp.data), 2)
@@ -103,7 +101,8 @@ class PrivateReviewApiTest(TestCase):
         review = Review.objects.get(id=resp.data['id'])
         for key in payload.keys():
             if key == 'submission_date':
-                payload[key] = datetime.strptime(payload[key], '%Y-%m-%d').date()
+                payload[key] = datetime.strptime(
+                    payload[key], '%Y-%m-%d').date()
             self.assertEqual(payload[key], getattr(review, key))
 
     def test_partial_update_review(self):
@@ -136,6 +135,6 @@ class PrivateReviewApiTest(TestCase):
         self.assertEqual(review.ip_address, payload['ip_address'])
         self.assertEqual(review.rating, payload['rating'])
         self.assertEqual(review.summary, payload['summary'])
-        self.assertEqual(review.submission_date,
-            datetime.strptime(payload['submission_date'], '%Y-%m-%d').date())
+        self.assertEqual(review.submission_date, datetime.strptime(
+                         payload['submission_date'], '%Y-%m-%d').date())
         self.assertEqual(review.company, payload['company'])

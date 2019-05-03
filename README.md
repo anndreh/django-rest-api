@@ -9,7 +9,7 @@ Source code that allow users create and retrieve reviews. The technolgies used i
 
 ## Documentation
 
-## How to install and setup
+### How to install and setup
 
 Docker and docker-compose is required.
 To start project, run:
@@ -24,7 +24,7 @@ docker-compose run --rm app sh -c "python manage.py test && flake8"
 
 The API will then be available at http://localhost:8000
 
-## Tests
+### Tests
 
 Executing all tests (unit tests, PEP8 e coverage)
 ```
@@ -36,12 +36,12 @@ Showing report (coverage - 100%)
 docker-compose run --rm app sh -c "coverage report"
 ```
 
-## Admin area to see all data
+### Admin area to see all data
 
 Django admin page to see users and reviews:
 http://localhost:8000/admin/
 
-## API endpoints
+### API endpoints
 
 Generating Token
 ```

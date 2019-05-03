@@ -41,10 +41,12 @@ docker-compose run --rm app sh -c "coverage report"
 Django admin page to see users and reviews:
 http://localhost:8000/admin/
 
-#### API endpoints
+## API endpoints
 
 Generating new token with login:
 http://localhost:8000/api/user/token/
+
+#### Using Curl
 
 Listing reviews from logged user
 ```

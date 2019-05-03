@@ -4,3 +4,4 @@ psycopg2>=2.8.2,<2.9.0
 
 flake8>=3.7.0,<3.8.0
 ipython
+coverage

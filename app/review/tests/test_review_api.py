@@ -89,7 +89,7 @@ class PrivateReviewApiTest(TestCase):
         """Test creating review"""
         payload = {
             'title': 'Not Bad!',
-            'ip_address': '127.0.0.2',
+            'ip_address': '127.0.0.1',
             'rating': 3,
             'summary': 'I am disapointed',
             'submission_date': '2019-05-03',

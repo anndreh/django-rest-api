@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
                                        PermissionsMixin
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.conf import settings
 from datetime import date
 
@@ -43,7 +44,9 @@ class Review(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE
     )
-    rating = models.IntegerField()
+    rating = models.IntegerField(
+        validators=[MaxValueValidator(5), MinValueValidator(1)]
+    )
     title = models.CharField(max_length=64)
     summary = models.CharField(max_length=10000)
     ip_address = models.GenericIPAddressField()

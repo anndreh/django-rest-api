@@ -43,10 +43,10 @@ http://localhost:8000/admin/
 
 ## API endpoints
 
-Generating new token with login:
-http://localhost:8000/api/user/token/
-
-#### Using Curl
+Generating Token
+```
+curl -H "Content-Type: application/json" -d '{"email": "test2@email.com", "password": "123456"}' -X POST http://localhost:8000/api/v1/user/token/
+```
 
 Listing reviews from logged user
 ```

@@ -49,12 +49,16 @@ class PrivateReviewApiTest(TestCase):
             'test@email.com',
             '123456'
         )
+        self.user2 = get_user_model().objects.create_user(
+            'test2@email.com',
+            '654321'
+        )
         self.client.force_authenticate(self.user)
 
     def test_retrieve_reviews(self):
         """Test retrieving a list of reviews"""
         sample_review(user=self.user)
-        # sample_review(user=self.user)
+        sample_review(user=self.user)
 
         resp = self.client.get(REVIEW_URL)
         reviews = Review.objects.all().order_by('-submission_date')
@@ -63,16 +67,12 @@ class PrivateReviewApiTest(TestCase):
         serializer = ReviewSerializer(reviews, many=True)
 
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
-        self.assertEqual(resp.data, serializer.data)
+        self.assertEqual(len(resp.data), 2)
 
     def test_review_limited_to_user(self):
         """Teste retrieving reviews for user"""
-        user2 = get_user_model().objects.create_user(
-            'other@email.com',
-            '654321'
-        )
-        sample_review(user=user2)
         sample_review(user=self.user)
+        sample_review(user=self.user2)
 
         resp = self.client.get(REVIEW_URL)
 
